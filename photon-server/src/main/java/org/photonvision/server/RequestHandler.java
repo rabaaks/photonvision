@@ -61,6 +61,7 @@ import org.photonvision.vision.camera.PVCameraInfo;
 import org.photonvision.vision.objects.ObjectDetector;
 import org.photonvision.vision.objects.RknnModel;
 import org.photonvision.vision.objects.RubikModel;
+import org.photonvision.vision.objects.TensorRTModel;
 import org.photonvision.vision.processes.VisionSourceManager;
 import org.zeroturnaround.zip.ZipUtil;
 
@@ -672,6 +673,7 @@ public class RequestHandler {
                         switch (family) {
                             case RUBIK -> new RubikModel(modelProperties).load();
                             case RKNN -> new RknnModel(modelProperties).load();
+                            case TENSORRT -> new TensorRTModel(modelProperties).load();
                         };
             } catch (RuntimeException e) {
                 ctx.status(400);

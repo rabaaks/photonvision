@@ -41,6 +41,7 @@ import org.photonvision.common.logging.Logger;
 import org.photonvision.vision.objects.Model;
 import org.photonvision.vision.objects.RknnModel;
 import org.photonvision.vision.objects.RubikModel;
+import org.photonvision.vision.objects.TensorRTModel;
 
 /**
  * Manages the loading of neural network models.
@@ -201,6 +202,7 @@ public class NeuralNetworkModelManager {
         switch (Platform.getCurrentPlatform()) {
             case LINUX_QCS6490 -> supportedBackends.add(Family.RUBIK);
             case LINUX_RK3588_64 -> supportedBackends.add(Family.RKNN);
+            case LINUX_AARCH64_TENSORRT, LINUX_64_TENSORRT -> supportedBackends.add(Family.TENSORRT);
             default -> {
                 logger.warn(
                         "No supported neural network backends found for this platform: "
@@ -228,7 +230,8 @@ public class NeuralNetworkModelManager {
 
     public enum Family {
         RKNN(".rknn"),
-        RUBIK(".tflite");
+        RUBIK(".tflite"),
+        TENSORRT(".engine");
 
         private final String fileExtension;
 
@@ -336,6 +339,9 @@ public class NeuralNetworkModelManager {
                 }
                 case RUBIK -> {
                     models.get(properties.family()).add(new RubikModel(properties));
+                }
+                case TENSORRT -> {
+                    models.get(properties.family()).add(new TensorRTModel(properties));
                 }
             }
             logger.info(

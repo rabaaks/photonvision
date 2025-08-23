@@ -30,6 +30,13 @@ public enum Platform {
     WINDOWS_64("Windows x64", Platform::getUnknownModel, "winx64", false, OSType.WINDOWS, true),
     LINUX_32("Linux x86", Platform::getUnknownModel, "linuxx64", false, OSType.LINUX, true),
     LINUX_64("Linux x64", Platform::getUnknownModel, "linuxx64", false, OSType.LINUX, true),
+    LINUX_64_TENSORRT(
+            "Linux x64 with TensorRT",
+            Platform::getUnknownModel,
+            "linuxx64",
+            false,
+            OSType.LINUX,
+            true), // Jetson Orin Nano
     LINUX_RASPBIAN32(
             "Linux Raspbian 32-bit",
             Platform::getLinuxDeviceTreeModel,
@@ -65,6 +72,13 @@ public enum Platform {
             false,
             OSType.LINUX,
             true), // Jetson Nano, Jetson TX2
+    LINUX_AARCH64_TENSORRT(
+            "Linux AARCH64 with TensorRT",
+            Platform::getLinuxDeviceTreeModel,
+            "linuxarm64",
+            false,
+            OSType.LINUX,
+            true), // Jetson Orin Nano
 
     // PhotonVision Supported (Manual build/install)
     LINUX_ARM64(
@@ -133,6 +147,10 @@ public enum Platform {
 
     public static boolean isQCS6490() {
         return isRubik();
+    }
+
+    public static boolean isTensorRT() {
+        return currentPlatform == LINUX_AARCH64_TENSORRT || currentPlatform == LINUX_64_TENSORRT;
     }
 
     public static boolean isRaspberryPi() {
@@ -217,13 +235,13 @@ public enum Platform {
             } else if (isJetsonSBC()) {
                 if (OS_ARCH.equals("aarch64") || OS_ARCH.equals("arm64")) {
                     // TODO - do we need to check OS version?
-                    return LINUX_AARCH64;
+                    return LINUX_AARCH64_TENSORRT;
                 } else {
                     // Unknown/exotic installation
                     return UNKNOWN;
                 }
             } else if (OS_ARCH.equals("amd64") || OS_ARCH.equals("x86_64")) {
-                return LINUX_64;
+                return LINUX_64_TENSORRT;
             } else if (OS_ARCH.equals("x86") || OS_ARCH.equals("i386")) {
                 return LINUX_32;
             } else if (OS_ARCH.equals("aarch64") || OS_ARCH.equals("arm64")) {

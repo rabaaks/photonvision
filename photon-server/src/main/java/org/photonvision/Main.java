@@ -41,6 +41,7 @@ import org.photonvision.common.util.TestUtils;
 import org.photonvision.jni.PhotonTargetingJniLoader;
 import org.photonvision.jni.RknnDetectorJNI;
 import org.photonvision.jni.RubikDetectorJNI;
+import org.photonvision.jni.TensorRTDetectorJNI;
 import org.photonvision.mrcal.MrCalJNILoader;
 import org.photonvision.raspi.LibCameraJNILoader;
 import org.photonvision.server.Server;
@@ -256,6 +257,20 @@ public class Main {
             }
         } catch (IOException e) {
             logger.error("Failed to load rubik-JNI!", e);
+        }
+        try {
+            if (Platform.isTensorRT()) {
+                TensorRTDetectorJNI.forceLoad();
+                if (TensorRTDetectorJNI.getInstance().isLoaded()) {
+                    logger.info("TensorRTDetectorJNI loaded successfully.");
+                } else {
+                    logger.error("Failed to load TensorRTDetectorJNI!");
+                }
+            } else {
+                logger.error("Platform does not support TensorRT based machine learning!");
+            }
+        } catch (IOException e) {
+            logger.error("Failed to load tensorrt-JNI!", e);
         }
         try {
             MrCalJNILoader.forceLoad();

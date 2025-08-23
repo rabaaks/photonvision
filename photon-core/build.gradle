@@ -42,6 +42,12 @@ dependencies {
     implementation("org.photonvision:rubik_jni-java:$rubikVersion") {
         transitive = false
     }
+    implementation("org.photonvision:tensorrt_jni-jni:$tensorrtVersion:linuxx64") {
+        transitive = false
+    }
+    implementation("org.photonvision:tensorrt_jni-java:$tensorrtVersion") {
+        transitive = false
+    }
     implementation("org.photonvision:photon-libcamera-gl-driver-jni:$libcameraDriverVersion:linuxarm64") {
         transitive = false
     }
