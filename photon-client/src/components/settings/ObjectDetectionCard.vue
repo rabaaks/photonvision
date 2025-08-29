@@ -312,6 +312,9 @@ const handleBulkImport = () => {
                   640x640 YOLOv8 and YOLOv11 models trained and converted to `.tflite` format for QCS6490 compatible
                   backends are currently supported!
                 </span>
+                <span v-else-if="useSettingsStore().general.supportedBackends?.includes('TENSORRT')"
+                  >Upload a new object detection model to this device that can be used in a pipeline.
+                </span>
                 <span v-else>
                   If you're seeing this, something broke; please file a ticket and tell us the details of your
                   situation.</span
@@ -326,7 +329,9 @@ const handleBulkImport = () => {
                         ? '.rknn'
                         : useSettingsStore().general.supportedBackends?.includes('RUBIK')
                           ? '.tflite'
-                          : ''
+                          : useSettingsStore().general.supportedBackends?.includes('TENSORRT')
+                            ? '.engine'
+                            : ''
                     "
                   />
                   <v-text-field
@@ -344,8 +349,10 @@ const handleBulkImport = () => {
                     label="Model Version"
                     :items="
                       useSettingsStore().general.supportedBackends?.includes('RKNN')
-                        ? ['YOLOv5', 'YOLOv8', 'YOLO11']
-                        : ['YOLOv8', 'YOLO11']
+                      ? ['YOLOv5', 'YOLOv8', 'YOLO11']
+                      : useSettingsStore().general.supportedBackends?.includes('RUBIK')
+                      ? ['YOLOv8', 'YOLO11']
+                      : ['YOLOv5', 'YOLOv8', 'YOLOv11']
                     "
                   />
                   <v-btn

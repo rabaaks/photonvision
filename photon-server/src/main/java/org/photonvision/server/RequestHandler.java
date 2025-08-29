@@ -614,6 +614,10 @@ public class RequestHandler {
                 case LINUX_RK3588_64:
                     family = NeuralNetworkModelManager.Family.RKNN;
                     break;
+                case LINUX_64_TENSORRT:
+                case LINUX_AARCH64_TENSORRT:
+                    family = NeuralNetworkModelManager.Family.TENSORRT;
+                    break;
                 default:
                     ctx.status(400);
                     ctx.result("The current platform does not support object detection models");

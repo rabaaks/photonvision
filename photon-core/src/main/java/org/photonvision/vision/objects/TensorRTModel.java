@@ -47,8 +47,8 @@ public class TensorRTModel implements Model {
             throw new IllegalArgumentException("Resolution must be greater than 0");
         }
 
-        if (properties.family() != Family.RKNN) {
-            throw new IllegalArgumentException("Model family must be RKNN");
+        if (properties.family() != Family.TENSORRT) {
+            throw new IllegalArgumentException("Model family must be TENSORRT");
         }
 
         if (properties.version() != Version.YOLOV5
