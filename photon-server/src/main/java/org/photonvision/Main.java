@@ -152,7 +152,7 @@ public class Main {
             pipeline2024.targetModel = TargetModel.kAprilTag6p5in_36h11;
             pipeline2024.tagFamily = AprilTagFamily.kTag36h11;
             pipeline2024.inputShouldShow = true;
-            pipeline2024.solvePNPEnabled = true;
+            // pipeline2024.solvePNPEnabled = true;
 
             var psList2024 = new ArrayList<CVPipelineSettings>();
             psList2024.add(pipeline2024);
