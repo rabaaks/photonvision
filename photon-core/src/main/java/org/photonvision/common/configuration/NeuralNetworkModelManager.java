@@ -189,16 +189,16 @@ public class NeuralNetworkModelManager {
                         640,
                         Family.RUBIK,
                         Version.YOLOV8));
-            
+
         nnProps.addModelProperties(
-                new ModelProperties(
-                        Path.of(modelsDirectory.getAbsolutePath(), "yolov11cars.engine"),
-                        "Cars",
-                        new LinkedList<String>(List.of("Car")),
-                        640,
-                        640,
-                        Family.TENSORRT,
-                        Version.YOLOV11));
+            new ModelProperties(
+                    Path.of(modelsDirectory.getAbsolutePath(), "yolov8algaecoral.engine"),
+                    "Algae and Coral",
+                    new LinkedList<String>(List.of("Algae", "Coral")),
+                    640,
+                    640,
+                    Family.TENSORRT,
+                    Version.YOLOV8));
 
         return nnProps;
     }
