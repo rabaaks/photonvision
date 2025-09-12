@@ -36,7 +36,7 @@ public enum Platform {
             "linuxx64",
             false,
             OSType.LINUX,
-            true), // Jetson Orin Nano
+            true),
     LINUX_RASPBIAN32(
             "Linux Raspbian 32-bit",
             Platform::getLinuxDeviceTreeModel,
