@@ -45,6 +45,9 @@ dependencies {
     implementation("org.photonvision:tensorrt_jni-jni:$tensorrtVersion:linuxx64") {
         transitive = false
     }
+    implementation("org.photonvision:tensorrt_jni-jni:$tensorrtVersion:linuxarm64") {
+        transitive = false
+    }
     implementation("org.photonvision:tensorrt_jni-java:$tensorrtVersion") {
         transitive = false
     }
